@@ -2,10 +2,13 @@ package com.orangelala.framework.utils;
 
 import java.util.concurrent.CountDownLatch;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.zookeeper.CreateMode;
+import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.data.Stat;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
 import org.apache.zookeeper.ZooDefs.Ids;
 
@@ -58,24 +61,29 @@ public class ZkUtil {
 	 * 3.创建节点的时间限制（毫秒）
 	 */
 	public boolean createNode(String path,String data,long timeLimit) {
-		long startTime = System.currentTimeMillis();
 		try {
 			String create = zooKeeper.create(path, data.getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
 			return true;
 		} catch (Exception e) {
-			//创建节点失败,重新创建节点，直到创建节点成功
+			//创建锁失败，先判断当前线程持有的锁是否超时,超时需要先删除锁，在进行获取锁
 			while(true) {
-				//解决死锁问题
-				long nextTime = System.currentTimeMillis();
-				if(nextTime - startTime > timeLimit) {
-					return false;
+				String value = this.getData(path);
+				if(StringUtils.isNotEmpty(value)) {
+					long createTime = Long.parseLong(value);
+					long currentTime = System.currentTimeMillis();
+					long time = currentTime - createTime;
+					if(time > timeLimit) {
+						//超时锁,把锁删除
+						this.deleteNode(path);
+					}
 				}
+				//创建节点
 				try {
 					zooKeeper.create(path, data.getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
 					return true;
-				} catch (Exception e2) {
+				} catch (Exception e1) {
 					continue;
-				}
+				} 
 			}
 		}
 	}
@@ -89,6 +97,7 @@ public class ZkUtil {
 	public boolean createNode(String path,String data) {
 		try {
 			String create = zooKeeper.create(path, data.getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
+			System.out.println(create);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -107,5 +116,23 @@ public class ZkUtil {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	/**
+	 * 获取存放在节点的数据
+	 */
+	public String getData(String path) {
+		try {
+			byte[] data = zooKeeper.getData(path, false, new Stat());
+			if(data == null) {
+				return null;
+			}
+			return new String(data);
+		} catch (KeeperException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

@@ -1,6 +1,6 @@
 package com.orangelala.service.ucenter.mapper.sql;
 
-public interface UserSqlString {
+public class UserSqlString {
 	public static final String findByUname = "select id,username,password,salt,name,utype,birthday,userpic,sex,email,phone,status,"
 			+ "create_time as createTime,update_time as updateTime from tb_user where username=#{username}";
 	public static final String findByEmail = "select id,username,password,salt,name,utype,birthday,userpic,sex,email,phone,status,"

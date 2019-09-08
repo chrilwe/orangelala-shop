@@ -15,4 +15,8 @@ public interface ServiceList {
 	public static final String orangelala_service_cms = "orangelala-service-cms";
 	//商品价格服务
 	public static final String orangelala_service_price = "orangelala-service-price";
+	//商品基本信息服务
+	public static final String orangelala_service_item = "orangelala-service-item";
+	//分布式事务消息服务
+	public static final String orangelala_service_message = "orangelala-service-message";
 }

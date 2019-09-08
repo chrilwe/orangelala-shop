@@ -1,5 +1,7 @@
 package com.orangelala.service.price.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,12 +43,13 @@ public class PriceController implements IPriceController {
 		return itemPriceService.updateItemPrice(request);
 	}
 	
-	//添加商品价格
+	//批量查询价格
 	@Override
-	@PostMapping("/add")
-	public BaseResponse addItemPrice(ItemPrice itemPrice) {
-		
-		return itemPriceService.addItemPrice(itemPrice);
+	@GetMapping("/queryBatch")
+	public List<ItemPrice> queryPriceBatch(String itemIds) {
+
+		return itemPriceService.queryBatch(itemIds);
 	}
+	
 
 }

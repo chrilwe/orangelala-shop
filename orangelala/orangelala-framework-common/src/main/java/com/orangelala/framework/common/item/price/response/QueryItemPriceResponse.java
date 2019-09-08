@@ -10,10 +10,12 @@ import lombok.ToString;
 public class QueryItemPriceResponse extends BaseResponse {
 	private String itemId;
 	private long price;
-	public QueryItemPriceResponse(int code, String msg, String itemId, long price) {
+	private long originPrice;
+	public QueryItemPriceResponse(int code, String msg, String itemId, long price, long originPrice) {
 		super(code, msg);
 		this.itemId = itemId;
 		this.price = price;
+		this.originPrice = originPrice;
 	}
 
 }

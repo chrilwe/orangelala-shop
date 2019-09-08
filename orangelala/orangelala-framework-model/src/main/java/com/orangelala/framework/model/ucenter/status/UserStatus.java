@@ -5,6 +5,6 @@ package com.orangelala.framework.model.ucenter.status;
  *
  */
 public interface UserStatus {
-	public static final String YES = "正常";
-	public static final String NORMAL = "异常";
+	public static final String UNNORMAL = "异常";
+	public static final String NORMAL = "正常";
 }

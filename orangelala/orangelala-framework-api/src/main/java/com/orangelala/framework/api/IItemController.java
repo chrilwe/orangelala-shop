@@ -11,6 +11,7 @@ import com.orangelala.framework.common.base.BaseResponse;
 import com.orangelala.framework.common.item.request.QueryItemListRequest;
 import com.orangelala.framework.common.item.response.QueryItemListResponse;
 import com.orangelala.framework.model.item.Item;
+import com.orangelala.framework.model.item.ItemInfo;
 import com.orangelala.framework.model.item.category.ItemCategory;
 import com.orangelala.framework.model.item.details.ItemDetails;
 import com.orangelala.framework.model.item.inventory.ItemInventory;
@@ -36,4 +37,6 @@ public interface IItemController {
 	public BaseResponse addItemInventory(String itemId,int num);
 	//添加商品价格(商户管理)
 	public BaseResponse addItemPrice(String itemId,long price);
+	//根据商品id查询商品
+	public ItemInfo findItemInfoById(String itemId);
 }

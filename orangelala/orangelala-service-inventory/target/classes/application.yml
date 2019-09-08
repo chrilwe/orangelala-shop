@@ -19,16 +19,18 @@ spring:
       timeBetweenEvictionRunsMillis: 60000 #配置间隔检测连接是否有效的时间（单位是毫秒）
       minEvictableIdleTimeMillis: 300000  #连接在连接池的最小生存时间（毫秒）
   redis:
-    host: 127.0.0.1
-    port: 6379
-    timeout: 5000 #连接超时 毫秒
+    cluster:
+      nodes:
+      - 139.155.113.168:7001,139.155.113.168:7002,139.155.113.168:7003,139.155.113.168:7004,139.155.113.168:7005,139.155.113.168:7006
     jedis:
       pool:
-        maxActive: 3
-        maxIdle: 3
-        minIdle: 1
-        maxWait: -1 #连接池最大等行时间 -1没有限制
-
+        max-active: 300
+        max-wait: -1
+        max-idle: 100
+        min-idle: 10
+    database: 0
+    timeout: 60000
+      
 inventory: 
   list: 
     size: 20   #存放队列的数量
@@ -38,7 +40,7 @@ inventory:
     size: 100  #每个队列的大小
   query_time_out: 20000   #查询超时时间(毫秒)
   await_update_timeout: 20  #等待更新结果超时时间
-  zkNodes: 111.67.207.140:2181           #zookeeper节点
+  zkNodes: 139.155.113.168:2181           #zookeeper节点
   zkConnectTimeout: 8000  #获取锁的时间限制
   
 eureka:

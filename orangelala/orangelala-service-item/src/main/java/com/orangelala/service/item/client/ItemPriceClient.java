@@ -27,6 +27,4 @@ public interface ItemPriceClient {
 	@PostMapping("/update")
 	public BaseResponse updateItemPrice(UpdateItemPriceRequest request);
 	
-	@PostMapping("/add")
-	public BaseResponse addItemPrice(ItemPrice itemPrice);
 }

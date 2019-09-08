@@ -49,6 +49,11 @@ ribbon:
   ConnectTimeout: 5000  #请求连接的超时时间
   ReadTimeout: 6000 #请求处理的超时时间
 
-
-
+sms: 
+  resendTime: 60   #重新发送短信验证码时间（秒）
+  baseUrl: https://openapi.miaodiyun.com/distributor/sendSMS
+  accountSid: 
+  authToken: 
+  templateId: 
+  codeTimeout: 5  #验证码过期时间（分钟博那个）
 

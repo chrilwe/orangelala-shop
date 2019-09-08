@@ -28,7 +28,7 @@ public class Item {
 
 	private Long cid;
 	
-	private String type;
+	private String type;//属性
 	
 	private String packages;
 
@@ -37,4 +37,6 @@ public class Item {
 	private Date created;
 
 	private Date updated;
+	
+	private int freeShipping;//是否包邮：1.包邮 0.不包邮
 }

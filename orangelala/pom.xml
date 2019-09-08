@@ -190,5 +190,10 @@
 		<module>orangelala-service-im</module>
 		<module>orangelala-service-cms-client</module>
 		<module>orangelala-service-filesystem</module>
+		<module>orangelala-service-market</module>
+		<module>orangelala-service-comment</module>
+		<module>orangelala-service-message</module>
+		<module>orangelala-service-shipping</module>
+		<module>orangelala-service-coupon</module>
 	</modules>
 </project>

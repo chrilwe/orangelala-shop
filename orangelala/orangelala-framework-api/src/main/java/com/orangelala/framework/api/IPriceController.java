@@ -5,6 +5,8 @@ package com.orangelala.framework.api;
  *
  */
 
+import java.util.List;
+
 import com.orangelala.framework.common.base.BaseResponse;
 import com.orangelala.framework.common.item.price.request.QueryItemPriceRequest;
 import com.orangelala.framework.common.item.price.request.UpdateItemPriceRequest;
@@ -16,6 +18,6 @@ public interface IPriceController {
 	public QueryItemPriceResponse queryItemPrice(QueryItemPriceRequest request);
 	//更新商品价格
 	public BaseResponse updateItemPrice(UpdateItemPriceRequest request);
-	//添加商品价格
-	public BaseResponse addItemPrice(ItemPrice itemPrice);
+	//批量查询商品价格
+	public List<ItemPrice> queryPriceBatch(String itemIds);
 }

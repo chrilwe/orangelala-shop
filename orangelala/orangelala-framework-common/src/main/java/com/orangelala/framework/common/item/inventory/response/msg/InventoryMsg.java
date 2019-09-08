@@ -6,4 +6,5 @@ public class InventoryMsg extends Msg {
 	public static final String ITEM_NUM_NULL = "buyer item num is 0";
 	public static final String SYSTEM_BUSY = "system is very busy";
 	public static final String ITEM_INVENTORY_NO_ENOUGH = "this item inventory is not enough";
+	public static final String ITEM_INVENTORY_NOT_ALLOWED_ADD = "This item's inventory is not 0,not allowed to add inventory!";
 }

@@ -10,6 +10,7 @@ import com.orangelala.framework.common.base.BaseResponse;
 import com.orangelala.framework.common.item.request.QueryItemListRequest;
 import com.orangelala.framework.common.item.response.QueryItemListResponse;
 import com.orangelala.framework.model.item.Item;
+import com.orangelala.framework.model.item.ItemInfo;
 import com.orangelala.framework.model.item.category.ItemCategory;
 import com.orangelala.framework.model.item.details.ItemDetails;
 import com.orangelala.framework.model.item.params.ItemParams;
@@ -91,6 +92,14 @@ public class ItemController implements IItemController {
 	@Override
 	@PostMapping("/price/add")
 	public BaseResponse addItemPrice(String itemId, long price) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	//根据id查询
+	@Override
+	@GetMapping("/iteminfo/find")
+	public ItemInfo findItemInfoById(String itemId) {
 		// TODO Auto-generated method stub
 		return null;
 	}

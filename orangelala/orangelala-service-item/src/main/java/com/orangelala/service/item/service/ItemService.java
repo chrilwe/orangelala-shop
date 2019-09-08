@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.orangelala.framework.common.base.BaseResponse;
 import com.orangelala.framework.common.base.Code;
 import com.orangelala.framework.common.base.Msg;
+import com.orangelala.framework.common.item.price.request.UpdateItemPriceRequest;
 import com.orangelala.framework.common.item.response.code.ItemCode;
 import com.orangelala.framework.common.item.response.msg.ItemMsg;
 import com.orangelala.framework.model.item.Item;
@@ -129,13 +130,9 @@ public class ItemService {
 		if(item == null) {
 			return new BaseResponse(ItemCode.ITEM_NO_EXISTS,ItemMsg.ITEM_NO_EXISTS);
 		}
-		ItemPrice itemPrice = new ItemPrice();
-		itemPrice.setCreateTime(new Date());
-		itemPrice.setId(itemId);
-		itemPrice.setItemId(itemId);
-		itemPrice.setOriginPrice(price);
-		itemPrice.setPrice(price);
-		itemPrice.setVersion(1);
-		return itemPriceClient.addItemPrice(itemPrice);
+		UpdateItemPriceRequest request = new UpdateItemPriceRequest();
+		request.setItemId(itemId);
+		request.setPrice(price);
+		return itemPriceClient.updateItemPrice(request);
 	}
 }

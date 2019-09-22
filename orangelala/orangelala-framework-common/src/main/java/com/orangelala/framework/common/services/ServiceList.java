@@ -19,4 +19,6 @@ public interface ServiceList {
 	public static final String orangelala_service_item = "orangelala-service-item";
 	//分布式事务消息服务
 	public static final String orangelala_service_message = "orangelala-service-message";
+	//订单服务
+	public static final String orangelala_service_order = "orangelala-service-order";
 }

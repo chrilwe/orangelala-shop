@@ -20,9 +20,6 @@ public class OrderDetails {
     private Integer itemNum;
     private int itemPrice;
     private String valid;
-    private Date startTime;
-    private Date endTime;
 	private String itemTitle;
-	//邮费
-	private int shippingFee;
+
 }

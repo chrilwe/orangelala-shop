@@ -19,4 +19,5 @@ public class ItemInventory {
 	private String itemId;
 	private Date createTime;
 	private Date updateTime;
+	private int version;
 }

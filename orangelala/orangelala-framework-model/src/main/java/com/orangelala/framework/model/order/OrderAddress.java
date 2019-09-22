@@ -11,11 +11,9 @@ import lombok.ToString;
 @Data
 @ToString
 public class OrderAddress {
-	private String id;
+	private int id;
 	//收货人
 	private String receiver;
-	//手机号码
-	private String phone;
 	//省
 	private String province;
 	//市

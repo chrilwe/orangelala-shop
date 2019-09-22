@@ -6,7 +6,7 @@ spring:
     name: orangelala-service-ucenter
   datasource:
     druid:
-      url: jdbc:mysql://localhost:3306/orangelala_ucenter?characterEncoding=utf-8
+      url: jdbc:mysql://localhost:3306/orangelala_ucenter?characterEncoding=utf-8&allowMultiQueries=true
       username: root
       password: root
       driverClassName: com.mysql.jdbc.Driver
@@ -26,6 +26,11 @@ eureka:
   instance:
     instance-id: orangelala-service-ucenter-20000
     prefer-ip-address: true     #访问路径可以显示IP地址     
+    
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations:
+  - classpath:mapper/**.xml
 
 info: 
   app.name: orangelala-service-ucenter

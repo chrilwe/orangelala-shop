@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orangelala.service.ucenter.mapper.RegionMapper">
+	<select id="findRegionByLevel" parameterType="int"
+		resultType="com.orangelala.framework.model.ucenter.Region">
+		select
+		id,name,pid,sname,level,citycode,yzcode,mername,Lng,Lat,pingyin from
+		region where level=#{level}
+	</select>
+
+	<select id="findRegionBypid" parameterType="int"
+		resultType="com.orangelala.framework.model.ucenter.Region">
+		select
+		id,name,pid,sname,level,citycode,yzcode,mername,Lng,Lat,pingyin from
+		region where pid=#{pid}
+	</select>
+
+	<select id="findRegionById" parameterType="int"
+		resultType="com.orangelala.framework.model.ucenter.Region">
+		select
+		id,name,pid,sname,level,citycode,yzcode,mername,Lng,Lat,pingyin from
+		region where id=#{id}
+	</select>
+
+	<resultMap type="com.orangelala.framework.model.ucenter.RegionTreeNode"
+		id="regionTreeNode">
+		<id property="id" column="one_id" />
+		<result property="name" column="one_name" />
+		<result property="pid" column="one_pid" />
+		<result property="sname" column="one_sname" />
+		<result property="level" column="one_level" />
+		<result property="citycode" column="one_citycode" />
+		<result property="yzcode" column="one_yzcode" />
+		<result property="mername" column="one_mername" />
+		<result property="Lng" column="one_Lng" />
+		<result property="Lat" column="one_Lat" />
+		<result property="pingyin" column="one_pingyin" />
+		<collection property="chrildren"
+			ofType="com.orangelala.framework.model.ucenter.RegionTreeNode">
+			<id property="id" column="two_id" />
+			<result property="name" column="two_name" />
+			<result property="pid" column="two_pid" />
+			<result property="sname" column="two_sname" />
+			<result property="level" column="two_level" />
+			<result property="citycode" column="two_citycode" />
+			<result property="yzcode" column="two_yzcode" />
+			<result property="mername" column="two_mername" />
+			<result property="Lng" column="two_Lng" />
+			<result property="Lat" column="two_Lat" />
+			<result property="pingyin" column="two_pingyin" />
+			<collection property="chrildren"
+				ofType="com.orangelala.framework.model.ucenter.RegionTreeNode">
+				<id property="id" column="three_id" />
+				<result property="name" column="three_name" />
+				<result property="pid" column="three_pid" />
+				<result property="sname" column="three_sname" />
+				<result property="level" column="three_level" />
+				<result property="citycode" column="three_citycode" />
+				<result property="yzcode" column="three_yzcode" />
+				<result property="mername" column="three_mername" />
+				<result property="Lng" column="three_Lng" />
+				<result property="Lat" column="three_Lat" />
+				<result property="pingyin" column="three_pingyin" />
+				<collection property="chrildren"
+					ofType="com.orangelala.framework.model.ucenter.RegionTreeNode">
+					<id property="id" column="four_id" />
+					<result property="name" column="four_name" />
+					<result property="pid" column="four_pid" />
+					<result property="sname" column="four_sname" />
+					<result property="level" column="four_level" />
+					<result property="citycode" column="four_citycode" />
+					<result property="yzcode" column="four_yzcode" />
+					<result property="mername" column="four_mername" />
+					<result property="Lng" column="four_Lng" />
+					<result property="Lat" column="four_Lat" />
+					<result property="pingyin" column="four_pingyin" />
+				</collection>
+			</collection>
+		</collection>
+	</resultMap>
+	<select id="queryRegionTreeNode" resultMap="regionTreeNode">
+		select a.id as
+		one_id,a.name as one_name,a.pid as one_pid,a.sname as
+		one_sname,a.level as one_level,a.citycode as one_citycode,a.yzcode as
+		one_yzcode,a.mername as one_mername,a.Lng as one_Lng,a.Lat as
+		one_Lat,a.pingyin as one_pingyin,
+		b.id as two_id,b.name as
+		two_name,b.pid as two_pid,b.sname as two_sname,b.level as
+		two_level,b.citycode as two_citycode,b.yzcode as two_yzcode,b.mername
+		as two_mername,b.Lng as two_Lng,b.Lat as two_Lat,b.pingyin as
+		two_pingyin,
+		c.id as three_id,c.name as three_name,c.pid as
+		three_pid,c.sname as three_sname,c.level as three_level,c.citycode as
+		three_citycode,c.yzcode as three_yzcode,c.mername as
+		three_mername,c.Lng as three_Lng,c.Lat as three_Lat,c.pingyin as
+		three_pingyin,
+		d.id as four_id,d.name as four_name,d.pid as
+		four_pid,d.sname as four_sname,d.level as four_level,d.citycode as
+		four_citycode,d.yzcode as four_yzcode,d.mername as four_mername,d.Lng
+		as four_Lng,d.Lat as four_Lat,d.pingyin as four_pingyin from region a
+		left join region b on a.id=b.pid left join region c on b.id=c.pid left
+		join region d on c.id=d.pid
+	</select>
+
+	<resultMap type="com.orangelala.framework.model.ucenter.RegionQueryList"
+		id="regionQueryList">
+		<result property="total" column="total" />
+		<collection property="regionList"
+			ofType="com.orangelala.framework.model.ucenter.Region">
+			<id property="id" column="id" />
+			<result property="name" column="name" />
+			<result property="pid" column="pid" />
+			<result property="sname" column="sname" />
+			<result property="level" column="level" />
+			<result property="citycode" column="citycode" />
+			<result property="yzcode" column="yzcode" />
+			<result property="mername" column="mername" />
+			<result property="Lng" column="Lng" />
+			<result property="Lat" column="Lat" />
+			<result property="pingyin" column="pingyin" />
+		</collection>
+	</resultMap>
+	<select id="queryRegionListBylevelAndKeyword" resultMap="regionQueryList">
+		select
+		(select count(*) from region where level=#{level} and name like
+		#{name}) as total,a.* from region a where level=#{level} and name like
+		#{name}
+		limit #{start},#{size}
+	</select>
+
+	<select id="queryRegionListByKeyword" resultMap="regionQueryList">
+		select
+		(select
+		count(*) from region where name like
+		#{name}) as total,a.* from region
+		a where name like #{name}
+		limit #{start},#{size}
+	</select>
+
+	<select id="queryRegionListByLevel" resultMap="regionQueryList">
+		select
+		(select
+		count(*) from region where level=#{level}) as total,a.* from region a
+		where level=#{level}
+		limit #{start},#{size}
+	</select>
+
+	<select id="queryRegionList" resultMap="regionQueryList">
+		select
+		(select count(*)
+		from region) as total,a.* from region a
+		limit #{start},#{size}
+	</select>
+
+	<select id="queryRegionBatcByIdList" parameterType="java.util.List"
+		resultType="com.orangelala.framework.model.ucenter.Region">
+		select * from region where id in
+		<foreach collection="list" index="index" item="id" open="("
+			separator="," close=")">#{id}</foreach>
+	</select>
+
+	<update id="updateRegion" parameterType="com.orangelala.framework.model.ucenter.Region">
+		update region set
+		name=#{name},pid=#{pid},sname=#{sname},level=#{level},citycode=#{citycode},yzcode=#{yzcode},mername=#{mername},Lng=#{Lng},Lat=#{Lat},pingyin=#{pingyin}
+		where id=#{id}
+	</update>
+
+	<update id="updateRegionBatch" parameterType="java.util.List">
+		<foreach collection="list" separator=";" item="region">update region
+			set
+			name=#{region.name},pid=#{region.pid},sname=#{region.sname},level=#{region.level},citycode=#{region.citycode},yzcode=#{region.yzcode},mername=#{region.mername},Lng=#{region.Lng},Lat=#{region.Lat},pingyin=#{region.pingyin}
+			where id=#{region.id}</foreach>
+	</update>
+	
+	<select id="findAllRegion" resultType="com.orangelala.framework.model.ucenter.Region">
+		select * from region
+	</select>
+</mapper>

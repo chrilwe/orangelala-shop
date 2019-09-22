@@ -17,6 +17,7 @@ import com.orangelala.framework.common.ucenter.response.code.UcenterCode;
 import com.orangelala.framework.common.ucenter.response.msg.UcenterMsg;
 import com.orangelala.framework.model.auth.SmsCodeInfo;
 import com.orangelala.framework.model.ucenter.User;
+import com.orangelala.service.ucenter.annotation.TestAnnotation;
 import com.orangelala.service.ucenter.service.SmsEmailService;
 import com.orangelala.service.ucenter.service.UserService;
 
@@ -69,4 +70,9 @@ public class UcenterController implements IUcenterController {
 		return smsEmailService.sendEmailCode(email);
 	}
 	
+	@TestAnnotation
+	@GetMapping("/test")
+	public void test() {
+		System.out.println("hello");
+	}
 }

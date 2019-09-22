@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orangelala.service.inventory.mapper.ItemInventoryMapper">
+	<update id="reduce" parameterType="java.util.Map">
+		<foreach collection="map" index="key" item="value" open="" separator="," close="">
+			update orangelala_inventory set num=#{value},version=#{version}+1 where item_id=#{key} and version=#{version}
+		</foreach>
+	</update>
+	
+	<select id="findByItemId" parameterType="String" resultType="com.orangelala.framework.model.item.inventory.ItemInventory">
+		select id,num,item_id as itemId,version from orangelala_inventory where item_id=#{itemId}
+	</select>
+	
+	<select id="findByItemIds" parameterType="java.util.List" resultType="com.orangelala.framework.model.item.inventory.ItemInventory">
+		<foreach collection="itemIds" item="itemId" open="(" separator="," close=")">
+			select id,num,item_id as itemId,version from orangelala_inventory where item_id=#{itemId}
+		</foreach>
+	</select>
+	
+	<update id="increase">
+		update orangelala_inventory set num=#{num},version=#{version}+1 where item_id=#{itemId} and version=#{version}
+	</update>
+	
+	<insert id="insert" parameterType="com.orangelala.framework.model.item.inventory.ItemInventory" useGeneratedKeys="true" keyProperty="id">
+		insert into orangelala_inventory(id,num,item_id,create_time,update_time,version) values(#{id},#{num},#{itemId},#{createTime},#{updateTime},#{version})
+	</insert>
+</mapper>

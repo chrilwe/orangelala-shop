@@ -7,7 +7,7 @@
   </parent>
   <artifactId>orangelala-service-order</artifactId>
   
-  
+ 
   <dependencies>
 		<dependency>
 			<groupId>chrilwe.cn</groupId>
@@ -98,6 +98,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-amqp</artifactId>
 		</dependency>
+		<dependency>
+            <groupId>io.seata</groupId>
+            <artifactId>seata-all</artifactId>
+            <version>0.8.0</version>
+        </dependency>
+        <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-seata</artifactId>
+                <version>2.1.0.RELEASE</version>
+            </dependency>
 	</dependencies>
 
 	<build>

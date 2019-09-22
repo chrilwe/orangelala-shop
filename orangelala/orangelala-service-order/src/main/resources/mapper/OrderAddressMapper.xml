@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orangelala.service.order.mapper.OrderAddressMapper">
+
+	<insert id="add" parameterType="com.orangelala.framework.model.order.OrderAddress" useGeneratedKeys="true" keyProperty="id">
+		insert into order_address(id,receiver,province,city,district,address_detail,user_id) values(#{id},#{receiver},#{province},#{city},#{district},#{addressDetail},#{userId})
+	</insert>
+	
+	<select id="findById" parameterType="int" resultType="com.orangelala.framework.model.order.OrderAddress">
+		select id,receiver,province,city,district,address_detail as addressDetail,user_id as userId from order_address where id=#{id}
+	</select>
+	
+	<delete id="delById" parameterType="int">
+		delete from order_address where id=#{id} and user_id=#{userId}
+	</delete>
+	
+	<update id="update" parameterType="com.orangelala.framework.model.order.OrderAddress">
+		update order_address set receiver=#{receiver},province=#{province},city=#{city},district=#{district},address_detail=#{addressDetail} where id=#{id} and user_id=#{userId}
+	</update>
+</mapper>

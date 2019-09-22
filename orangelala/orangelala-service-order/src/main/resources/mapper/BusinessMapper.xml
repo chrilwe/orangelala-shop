@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orangelala.service.order.mapper.BusinessMapper">
+	<resultMap id="orderInfos" type="com.orangelala.framework.model.order.OrderInfos">
+		<association property="order" javaType="com.orangelala.framework.model.order.Order">
+			<id column="a_order_number" property="orderNumber"/>
+			<result column="a_address_id" property="addressId"/>
+			<result column="a_init_price" property="initPrice"/>
+			<result column="a_price" property="price"/>
+			<result column="a_create_time" property="createTime"/>
+			<result column="a_expire_sec" property="expireSec"/>
+			<result column="a_status" property="status"/>
+			<result column="a_user_id" property="userId"/>
+			<result column="a_details" property="details"/>
+			<result column="a_pay_detail_id" property="payDetailId"/>
+			<result column="a_shipping_id" property="shippingId"/>
+			<result column="a_shop_id" property="shopId"/>
+		</association>
+		
+		<association property="orderAddress" javaType="com.orangelala.framework.model.order.OrderAddress">
+			<id column="b_id" property="id"/>
+			<result column="b_receiver" property="receiver"/>
+			<result column="b_province" property="province"/>
+			<result column="b_city" property="city"/>
+			<result column="b_district" property="district"/>
+			<result column="b_address_detail" property="addressDetail"/>
+			<result column="b_user_id" property="userId"/>
+		</association>
+		
+		<collection property="orderDetails" javaType="com.orangelala.framework.model.order.OrderDetails">
+			<id column="c_id" property="id"/>
+			<result column="c_order_number" property="orderNumber"/>
+			<result column="c_item_id" property="itemId"/>
+			<result column="c_item_num" property="itemNum"/>
+			<result column="c_item_price" property="itemPrice"/>
+			<result column="c_valid" property="valid"/>
+			<result column="c_item_title" property="itemTitle"/>
+		</collection>
+	</resultMap>
+	<select id="findOrderInfosByOrderNumberAndUid" resultMap="orderInfos">
+		select a.*,(select b.* from order_address b where b.order_number=#{orderNumber} and b.user_id=#{userId}),(select c.* from order_detail c where c.order_number=#{orderNumber}) from order a where order_number=#{orderNumber} and userId=#{userId}
+	</select>
+	
+	<insert id="addOrderCoupon" parameterType="com.orangelala.framework.model.order.OrderCoupon">
+		insert into order_coupon(id,order_number,coupon_id) values(#{id},#{orderNumber},#{couponId})
+	</insert>
+</mapper>

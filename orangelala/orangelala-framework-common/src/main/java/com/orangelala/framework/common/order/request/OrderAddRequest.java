@@ -13,4 +13,5 @@ public class OrderAddRequest extends BaseRequest {
 	private Order order;
 	private String itemIds;
 	private String shopId;
+	private String couponIds;
 }

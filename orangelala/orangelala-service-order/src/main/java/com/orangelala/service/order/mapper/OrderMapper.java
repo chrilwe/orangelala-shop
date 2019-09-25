@@ -16,4 +16,5 @@ public interface OrderMapper {
 	public Order findByOrderNumberAndUid(@Param("orderNumber")String orderNumber,@Param("userId")String userId);
 	//更新订单状态
 	public void updateStatusByOrderNumber(@Param("status")String status,@Param("orderNumber")String orderNumber);
+	public void updateStatusByOrderNumberAndUid(@Param("status")String status,@Param("orderNumber")String orderNumber,@Param("userId")String userId);
 }

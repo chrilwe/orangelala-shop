@@ -12,8 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.orangelala.framework.api.IOrderController;
 import com.orangelala.framework.common.base.BaseController;
 import com.orangelala.framework.common.base.BaseResponse;
+import com.orangelala.framework.common.base.Code;
+import com.orangelala.framework.common.base.Msg;
+import com.orangelala.framework.common.item.inventory.response.code.InventoryCode;
+import com.orangelala.framework.common.item.inventory.response.msg.InventoryMsg;
 import com.orangelala.framework.common.order.request.OrderAddRequest;
 import com.orangelala.framework.common.order.response.OrderAddResponse;
+import com.orangelala.framework.common.order.status.OrderStatus;
 import com.orangelala.framework.model.order.Order;
 import com.orangelala.framework.utils.Oauth2Util;
 import com.orangelala.service.order.service.OrderService;
@@ -32,7 +37,17 @@ public class OrderController extends BaseController implements IOrderController 
 	@Override
 	@PostMapping("/commit")
 	public OrderAddResponse commitOrder(OrderAddRequest orderAddRequest) {
-		OrderAddResponse commitOrder = orderService.commitOrder(orderAddRequest, getUserId());
+		OrderAddResponse commitOrder = null;
+		try {
+			commitOrder = orderService.commitOrder(orderAddRequest, getUserId());
+		} catch (Exception e) {
+			String message = e.getMessage();
+			if(message.equals(InventoryMsg.ITEM_INVENTORY_NO_ENOUGH)) {
+				return new OrderAddResponse(InventoryCode.ITEM_INVENTORY_NO_ENOUGH,InventoryMsg.ITEM_INVENTORY_NO_ENOUGH,null,0);
+			} else {
+				return new OrderAddResponse(Code.SYSTEM_ERROR,Msg.SYSTEM_ERROR,null,0);
+			}
+		}
 		return commitOrder;
 	}
 	
@@ -48,8 +63,8 @@ public class OrderController extends BaseController implements IOrderController 
 	@Override
 	@GetMapping("/cancel")
 	public BaseResponse cancelOrderById(String orderNumber) {
-		BaseResponse cancelOrderById = orderService.cancelOrderById(orderNumber);
-		return cancelOrderById;
+		orderService.updateOrderStatus(OrderStatus.PAY_CANCEL, orderNumber, getUserId());
+		return new BaseResponse(Code.SUCCESS,Msg.SUCCESS);
 	}
 
 	@Override

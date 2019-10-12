@@ -1,7 +1,9 @@
 package com.orangelala.framework.api;
 import com.orangelala.framework.common.base.BaseResponse;
+import com.orangelala.framework.common.base.PageBean;
 import com.orangelala.framework.common.ucenter.request.EmailRegisterRequest;
 import com.orangelala.framework.common.ucenter.request.PhoneRegisterRequest;
+import com.orangelala.framework.common.ucenter.request.UserPageBeanQueryRequest;
 import com.orangelala.framework.common.ucenter.response.RegisterResponse;
 import com.orangelala.framework.model.auth.SmsCodeInfo;
 import com.orangelala.framework.model.ucenter.User;
@@ -21,4 +23,6 @@ public interface IUcenterController {
 	public BaseResponse sendSmsCode(String phoneNumber);
 	//发送邮箱验证码
 	public BaseResponse sendEmailCode(String email);
+	//条件分页查询
+	public PageBean pageBeanQuery(UserPageBeanQueryRequest queryRequest);
 }

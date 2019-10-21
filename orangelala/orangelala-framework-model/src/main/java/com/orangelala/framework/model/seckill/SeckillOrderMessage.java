@@ -17,4 +17,6 @@ public class SeckillOrderMessage {
 	private String itemId;
 	private Date createTime;
 	private String userID;
+	private String status;
+	private int payTimeLimitSec;
 }

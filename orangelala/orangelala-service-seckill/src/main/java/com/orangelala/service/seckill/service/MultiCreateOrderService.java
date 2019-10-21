@@ -5,5 +5,5 @@ package com.orangelala.service.seckill.service;
  *
  */
 public interface MultiCreateOrderService {
-	public void createOrder();
+	public void createOrder(String itemId);
 }

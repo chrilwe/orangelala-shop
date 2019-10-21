@@ -53,11 +53,5 @@ public class SeckillStatusJob implements Runnable {
 			stringRedisTemplate.opsForHash().put(SECKILL_STATUS+userId, itemId, seckillStatus);
 		}
 	}
-	
-	//根据状态和商品编号和用户ID查询抢购生成的订单号
-	private String queryOrderIdByStatusAndItemId(String status, String itemId, String userId) {
-		
-		return null;
-	}
 
 }

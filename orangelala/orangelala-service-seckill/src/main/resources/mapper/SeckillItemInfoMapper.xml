@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.orangelala.service.seckill.mapper.SeckillItemInfoMapper">
+	<select id="findByItemId" parameterType="String" resultType="com.orangelala.framework.model.seckill.SeckillItemInfo">
+		select item_ID,item_name,init_price,seckill_price,images,is_start,start_time,end_time,status,inventory from seckill_item where item_ID=#{itemId}
+	</select>
+	
+	<insert id="add" parameterType="com.orangelala.framework.model.seckill.SeckillItemInfo">
+		insert into seckill_item(item_ID,item_name,init_price,seckill_price,images,is_start,start_time,end_time,status,inventory) values(#{itemId},#{itemName},#{initPrice},#{seckillPrice},#{images},#{isStart},#{startTime},#{endTime},#{status},#{inventory})
+	</insert>
+	
+	<update id="update" parameterType="com.orangelala.framework.model.seckill.SeckillItemInfo">
+		update seckill_item set item_name=#{itemName},init_price=#{initPrice},seckill_price=#{seckillPrice},images=#{images},is_start=#{isStart},start_time=#{startTime},end_time=#{endTime},status=#{status},inventory=#{inventory} where item_ID=#{itemId}
+	</update>
+	
+	<update id="updateStatus">
+		update seckill_item set status=#{status} where item_ID=#{itemId}
+	</update>
+</mapper>
